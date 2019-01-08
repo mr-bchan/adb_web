@@ -6,17 +6,13 @@ https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutori
 
 https://www.adb.org/search
 
-## Node Installation
-```
-express express-locallibrary-tutorial --view=pug
-```
 
 ## Running the website
 
 First, install the dependencies (the install command will fetch all the dependency packages listed in the project's package.json file).
 
 ```
-cd express-locallibrary-tutorial
+cd express-adb-web
 ```
 
 ```
@@ -27,7 +23,7 @@ Then run the application.
 
 On macOS or Linux, use this command:
 ```
-npm start
+DEBUG=express-adb-web:* npm start
 ```
 
 Then load http://localhost:3000/ in your browser to access the app.
