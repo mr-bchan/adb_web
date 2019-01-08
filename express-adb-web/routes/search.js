@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   console.log('Received query request: ' + query)
   
   var title = 'Search | Asian Development Bank'
-  var length = 9999 //dummy value
+  var length = 'XXXXX' //dummy value
   var data = [
   	{
   		'project_no': '123456',
@@ -34,9 +34,29 @@ router.get('/', function(req, res, next) {
   		'country': 'Lorem ipsum dolor',
   		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
   		'title': 'Aenean commodo ligula eget dolor'
-  	}
+  	},
+  	
+  	{
+  		'project_no': '123456',
+  		'country': 'Lorem ipsum dolor',
+  		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+  		'title': 'Aenean commodo ligula eget dolor'
+  	},
 
-  ] //dummy value
+   	{
+  		'project_no': '123456',
+  		'country': 'Lorem ipsum dolor',
+  		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+  		'title': 'Aenean commodo ligula eget dolor'
+  	},
+
+   	{
+  		'project_no': '123456',
+  		'country': 'Lorem ipsum dolor',
+  		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+  		'title': 'Aenean commodo ligula eget dolor'
+  	}
+  ] //dummy values
 
   // check if undefined, return to home
   if(query){

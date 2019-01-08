@@ -9,6 +9,13 @@ block content
 
   #search_results
     h3.font-grey #{length} results for #{query}
-    #{data}
+
+    each val, index in data
+      .result-card
+          h4= val.text
+          h5.font-grey= 'Project Number: ' + val.project_no
+          h5.font-grey= 'Country: ' + val.country
+          h5.font-grey= 'Title: ' + val.title
+      br
     br
-    br
+    
