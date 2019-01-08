@@ -22,6 +22,8 @@ npm install
 Then run the application.
 
 On macOS or Linux, use this command:
-> npm start
+```
+npm start
+```
 
 Then load http://localhost:3000/ in your browser to access the app.
