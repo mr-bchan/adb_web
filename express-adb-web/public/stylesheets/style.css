@@ -1,8 +1,31 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.page-wrap {
+    width: 75%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: white;
+
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0px;	
+}
+
+.footer{
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    border: 30px solid #264083;
+    position: fixed;
 }
