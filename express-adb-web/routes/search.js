@@ -14,10 +14,37 @@ router.get('/', function(req, res, next) {
   
   var title = 'Search | Asian Development Bank'
   var length = 9999 //dummy value
-  
+  var data = [
+  	{
+  		'project_no': '123456',
+  		'country': 'Lorem ipsum dolor',
+  		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+  		'title': 'Aenean commodo ligula eget dolor'
+  	},
+
+   	{
+  		'project_no': '123456',
+  		'country': 'Lorem ipsum dolor',
+  		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+  		'title': 'Aenean commodo ligula eget dolor'
+  	},
+
+   	{
+  		'project_no': '123456',
+  		'country': 'Lorem ipsum dolor',
+  		'text': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+  		'title': 'Aenean commodo ligula eget dolor'
+  	}
+
+  ] //dummy value
+
   // check if undefined, return to home
   if(query){
-  	res.render('search', { title: title, query: query, length: length});
+  	res.render('search', { title: title, 
+  						   query: query, 
+  						   length: length,
+  						   data: data
+  						});
   }
 
   else{
