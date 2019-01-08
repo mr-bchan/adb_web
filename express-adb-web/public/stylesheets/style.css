@@ -29,3 +29,7 @@ a {
     border: 30px solid #264083;
     position: fixed;
 }
+
+.font-grey{
+    color: gray;
+}

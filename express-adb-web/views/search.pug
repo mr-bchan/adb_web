@@ -3,7 +3,10 @@ extends layout
 block content
   h1 Search
   div.example
-    input#search_box(type='text', name='search', autocomplete="off")
+    input#search_box(type='text', name='search', autocomplete="off", value=query)
     button#search_button(type='submit', onclick="search_query(document.getElementById('search_box').value)")
       i.fa.fa-search
 
+  #search_results
+    h3.font-grey #{length} results for #{query}
+    adasdssadas
