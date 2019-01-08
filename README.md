@@ -21,10 +21,7 @@ npm install
 
 Then run the application.
 
-On Windows, use this command:
-> SET DEBUG=express-locallibrary-tutorial:* & npm start
-
 On macOS or Linux, use this command:
-> DEBUG=express-locallibrary-tutorial:* npm start
+> npm start
 
 Then load http://localhost:3000/ in your browser to access the app.
