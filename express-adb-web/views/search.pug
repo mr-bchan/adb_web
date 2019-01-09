@@ -4,9 +4,22 @@ block content
   h1 Search
   div.example
     input#search_box(type='text', name='search', autocomplete="off", value=query)
-    button#search_button(type='submit', onclick="search_query(document.getElementById('search_box').value)")
+    button#search_button(type='submit', onclick="search_query()")
       i.fa.fa-search
 
   #search_results
-    h3.font-grey #{length} results for #{query}
-    adasdssadas
+    h3.font-grey Results XX to XX of #{length} for #{query}
+
+    each val, index in data
+      .result-card  
+          h3.font-blue.cursor-pointer(onclick='alert("hello!")')= val.text
+          p.cursor-pointer= val.title
+          p.font-grey Project Number: #{val.project_no} |
+            | Country: #{val.country} | Link: <a href='http://www.google.com'> #{val.country} #{index} </a>
+
+      // check if hr needs to be added
+      unless index == data.length-1
+        hr
+    br    
+
+    
