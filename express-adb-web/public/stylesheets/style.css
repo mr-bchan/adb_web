@@ -2,9 +2,10 @@ body {
   font: 14px "Open Sans", "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+hr {
+    opacity: 0.20;
 }
+
 
 .page-wrap {
     width: 75%;
@@ -16,6 +17,9 @@ a {
     padding-right: 30px;
     padding-bottom: 30px;
     padding-left: 30px;
+
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .no-padding-bottom {
@@ -23,13 +27,22 @@ a {
 }
 
 .result-card{
-    background-color: #F8F8F8;
     padding-top: 10px;
     padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;  
-
+    padding-bottom: 5px;
+    padding-left: 10px;
 }
+
+.result-card:hover {
+  background: #F8F8F8;
+}
+
+/* Clear floats */
+.result-card::after {
+  content: "";
+  clear: both;
+}
+
 .footer{
     bottom: 0px;
     left: 0px;
@@ -39,5 +52,18 @@ a {
 }
 
 .font-grey{
-    color: gray;
+    color: #6B6B6A;
+}
+
+a,
+.font-blue{
+    color: #0B2569;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.margin-right{
+    margin-right: 15px;
 }
