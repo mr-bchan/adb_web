@@ -1,0 +1,36 @@
+.left-card{
+	float: left; 
+	width: 70%;
+	overflow-y: scroll;
+}
+
+.middle-card{
+	float: left; 
+	width: 30%;
+
+	border-left: 1px solid #6B6B6A;
+	border-right: 1px solid #6B6B6A;
+
+	overflow-y: scroll;
+}
+
+.right-card{
+	float: left; 
+	width: 25%;
+	overflow-y: scroll;
+}
+
+.with-padding{
+	padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.height-500px{
+	height: 500px;
+}
+
+.height-50px{
+	height: 50px;
+}

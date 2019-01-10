@@ -7,19 +7,52 @@ block content
     button#search_button(type='submit', onclick="search_query()")
       i.fa.fa-search
 
+  h3.font-grey Results XX to XX of #{length} for #{query}
+
   #search_results
-    h3.font-grey Results XX to XX of #{length} for #{query}
+    .left-card.bg-white.height-500px
+        each val, index in data
+          .result-card  
+              h3.font-blue.cursor-pointer(onclick='alert("hello!")')= val.text
+              p.cursor-pointer= val.title
+              p.font-grey Project Number: #{val.project_no} |
+                | Country: #{val.country} | Link: <a href='http://www.google.com'> #{val.country} #{index} </a>
+              span.bg-red.tag-input tag-2
+          // check if hr needs to be added
+          unless index == data.length-1
+            hr
 
-    each val, index in data
-      .result-card  
-          h3.font-blue.cursor-pointer(onclick='alert("hello!")')= val.text
-          p.cursor-pointer= val.title
-          p.font-grey Project Number: #{val.project_no} |
-            | Country: #{val.country} | Link: <a href='http://www.google.com'> #{val.country} #{index} </a>
-
-      // check if hr needs to be added
-      unless index == data.length-1
+    .middle-card.bg-white.with-padding.height-500px
+        h3 
+            |Show:   
+            a(onclick='alert("cause filter pressed!")')#cause_link.cursor-pointer Cause
+            | |  
+            a(onclick='alert("effect filter pressed!")')#effect_link.cursor-pointer Effect
+            | |  
+            a(onclick='alert("all links filter pressed!")')#all_link.cursor-pointer All
         hr
-    br    
 
-    
+        each val, index in data
+          .result-card
+              p.font-blue.cursor-pointer(onclick='alert("hello!")')= val.text
+              p.cursor-pointer= val.title
+
+
+              span(onclick='alert("Clicked!")').bg-blue.tag-input tag-1
+              span.bg-red.tag-input tag-2
+              span.bg-orange.tag-input tag-2
+              span(onclick='alert("Clicked!")').bg-blue.tag-input tag-1
+              span.bg-red.tag-input tag-2
+              span.bg-red.tag-input tag-2
+              span.bg-red.tag-input tag-2
+              span.bg-red.tag-input tag-2
+              
+          // check if hr needs to be added
+          unless index == data.length-1
+            hr
+
+
+
+    br(style='clear: left;')
+
+  br
