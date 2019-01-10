@@ -1,10 +1,10 @@
-.left-card{
+#left-card{
 	float: left; 
 	width: 70%;
 	overflow-y: scroll;
 }
 
-.middle-card{
+#middle-card{
 	float: left; 
 	width: 30%;
 
@@ -12,12 +12,14 @@
 	border-right: 1px solid #6B6B6A;
 
 	overflow-y: scroll;
+	visibility: hidden;
 }
 
-.right-card{
+#right-card{
 	float: left; 
 	width: 25%;
 	overflow-y: scroll;
+	visibility: hidden;
 }
 
 .with-padding{

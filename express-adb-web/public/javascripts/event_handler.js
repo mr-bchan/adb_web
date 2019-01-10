@@ -12,5 +12,10 @@ function search_query(){
 }
 
 function get_suggestions(){
-	console.log('Current input: ' + search_box.value)
+	console.log('Current input: ' + search_box.value);
+}
+
+function get_cause_effects(){
+	console.log($("#middle-card"));
+	console.log($("#middle-card").css('visibility', 'visible'));
 }

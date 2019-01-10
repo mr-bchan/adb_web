@@ -30,6 +30,9 @@ hr {
     padding-right: 10px;
     padding-bottom: 5px;
     padding-left: 10px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+       
 }
 
 .result-card:hover {
@@ -83,12 +86,15 @@ span.tag-input,
 .bg-orange{
     background-color: #ffd8b2;
 }
+
+.bg-grey{
+    background-color: #F0F0F0;
+}
 .width-300px{
     width: 300px;
 }
 
 span.tag-input{
-    border-radius: 25px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;
@@ -98,4 +104,16 @@ span.tag-input{
     margin-top: 10px;
     font-size: 12px;
     white-space:nowrap;
+}
+
+span.tag-input:hover {
+    background-color: #fffeea;
+}
+
+#related_results{
+    width:100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    height: 50px;
+    padding-top: 10px;
 }
