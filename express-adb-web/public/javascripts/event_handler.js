@@ -8,14 +8,94 @@ function search_query(){
     	console.log('Encoded URI: ' + query)
     	window.location.href = "/search?q=" + query;
     }
-	// call pam's api to get output
 }
 
 function get_suggestions(){
 	console.log('Current input: ' + search_box.value);
 }
 
-function get_cause_effects(){
-	console.log($("#middle-card"));
-	console.log($("#middle-card").css('visibility', 'visible'));
+
+// Clicking related keyword for filtering
+function filter_keyword(event){
+	
+	text = event.target.textContent;
+	console.log(data['data'])
+
+	filtered_data = data['data'].filter(function(x) {
+		return x['match'].includes(text)
+	});
+
+	console.log(filtered_data)
+	update_cause_effect_div(filtered_data)
+}
+
+
+// show problems in #left-card div
+function get_problems(){
+	
+
+}
+
+
+// show cause effect in #middle-card div
+function get_cause_effects(event){
+	span_keywords = event.target.parentElement.getElementsByClassName('bg-blue')
+	keywords = ''
+
+	for (var i = 0; i < span_keywords.length; i++) {
+	    keywords = keywords + ' ' + span_keywords[i].textContent; //second console output
+	}
+
+	httpPostAsync(comments = {
+		'text': keywords
+	}, url=API_URL_PROBLEM, callback=function(data){
+		data = JSON.parse(data)['data']['data']
+		update_cause_effect_div(data)
+	})
+
+	// toggle visibility of #middle-card div element
+	if($("#middle-card").css('visibility') == 'hidden'){
+		$("#middle-card").css('visibility', 'visible')
+	}
+
+}
+
+function reset_cause_effect_div(){
+	update_cause_effect_div(data['data'])
+}
+
+function update_cause_effect_div(data){
+		// clear cause-effect-card container
+		$("#cause-effect-card").empty();
+
+		// add result-card divs in cause-effect-card container
+		data.forEach(function(x){
+			result_card = $('<div/>', {"class" : 'result-card'});
+			
+			result_card.append( "<p class='font-blue cursor-pointer capitalize'>" + x['text']+ "</p>" );
+			result_card.append( "<a href=" + x['link'] + " target='_blank'> <p class='font-grey'><i>" + x['title']+ "</i></p></a>" );
+			
+			// Cause-Effect tag
+			span_type = $('<span/>', {"class" : 'bg-red tag-input'});
+			span_type.append('cause')
+			result_card.append(span_type)
+
+			span_type = $('<span/>', {"class" : 'bg-green tag-input'});
+			span_type.append('effect')
+			result_card.append(span_type)
+
+			x['match'].forEach(function(match){
+				span_match = $('<span/>', {"class" : 'bg-blue tag-input'});
+				span_match.append(match)
+				result_card.append(span_match)
+
+				span_match[0].onclick = function(event){filter_keyword(event)};
+			})
+
+
+			result_card.append( "<br> <hr>");
+
+			$("#cause-effect-card").append(result_card)
+		})
+		
 }
