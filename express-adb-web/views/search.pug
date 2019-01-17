@@ -4,13 +4,12 @@ block content
   h1 Search
   div.example
     input#search_box(type='text', name='search', autocomplete="off", value=query)
-    button#search_button(type='submit', onclick="search_query()")
+    button#search_button(type='submit', onclick="get_problems()")
       i.fa.fa-search
 
   #related_results
-    p
-      each keyword in data['related_keywords']
-        span.bg-grey.tag-input #{keyword}
+    each keyword in data['related_keywords']
+      span.bg-grey.tag-input #{keyword}
 
   h3.font-grey Results 1 to #{length} of #{length} for #{query}
   hr

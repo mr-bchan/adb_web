@@ -32,8 +32,19 @@ function filter_keyword(event){
 
 // show problems in #left-card div
 function get_problems(){
-	
+	console.log('[get_problems] User query:' + search_box.value)
 
+	// send POST to API
+	keywords = search_box.value
+	httpPostAsync(comments = {
+		'text': keywords
+	}, url=API_URL_PROBLEM, callback=function(data){
+		keywords = JSON.parse(data)['data']['related_keywords']
+		data = JSON.parse(data)['data']['data']
+
+		update_related_keywords_div(keywords)
+		// update_problem_dive(data)
+	})
 }
 
 
@@ -58,6 +69,18 @@ function get_cause_effects(event){
 		$("#middle-card").css('visibility', 'visible')
 	}
 
+}
+
+
+function update_related_keywords_div(keywords){
+	console.log(keywords)
+	$("#related_results").empty();
+
+	keywords.forEach(function(x){
+		span_related_keyword = $('<span/>', {"class" : 'bg-grey tag-input'});
+		span_related_keyword.append(x);
+		$("#related_results").append(span_related_keyword);
+	});
 }
 
 function reset_cause_effect_div(){
