@@ -2,8 +2,10 @@ extends layout
 
 block content
   h1 Search
-  div.example
+  div.example.index
     input#search_box(type='text', name='search', autocomplete="off")
     button#search_button(type='submit', onclick="search_query()")
       i.fa.fa-search
+    br
+    div#autosuggest
 

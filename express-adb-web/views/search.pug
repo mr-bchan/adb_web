@@ -2,12 +2,14 @@ extends layout
 
 block content
   h1 Search
-  div.example
+  div.example.search
     input#search_box(type='text', name='search', autocomplete="off", value=query)
     button#search_button(type='submit', onclick="get_problems()")
       i.fa.fa-search
     button#clear_button(type='submit', onclick="clear_input_field()")
       i.fa.fa-times
+    br
+    div#autosuggest
   #related_results
     each keyword in data['related_keywords']
       span(onclick="update_search_box(event)").bg-grey.tag-input #{keyword}

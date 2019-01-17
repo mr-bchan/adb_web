@@ -1,6 +1,11 @@
 
 
 function clear_input_field(){
+
+	// clear auto suggestions
+	$("#autosuggest").empty();
+	$("#autosuggest").css('visibility', 'hidden');
+
 	search_box.value = '';
 	search_box.focus();
 }
@@ -17,10 +22,38 @@ function search_query(){
     }
 }
 
-function get_suggestions(){
-	console.log('Current input: ' + search_box.value);
+function get_suggestions_index(){
+	text = search_box.value
+	console.log('Current input: ' + text);
+
+	// dummy values
+	dummy_values = [text + 'a', text + 'ab', text + 'abc', text + ' some characters', text + ' some more characters']
+
+	$("#autosuggest").empty();
+
+	if(text == ''){
+		$("#autosuggest").css('visibility', 'hidden');
+	}
+
+	else{
+		if(search_box.parentElement.className == 'example index')
+			search_function = 'use_suggestion(event)'
+		else{
+			search_function = 'update_search_box(event)'
+		}
+
+		dummy_values.forEach(function(x){
+			$("#autosuggest").append("<div class='suggestion', onclick=" + search_function + ">" + x + "</div> <hr>	")
+		})
+		
+		$("#autosuggest").css('visibility', 'visible');
+	}
 }
 
+function use_suggestion(event){
+	search_box.value = event.target.textContent
+	search_query()
+}
 
 function update_search_box(event){
 	text = event.target.textContent;
@@ -60,6 +93,10 @@ function filter_keyword(event, target_div){
 // show problems in #left-card div
 function get_problems(){
 	console.log('[get_problems] User query:' + search_box.value)
+
+	// clear auto suggestions
+	$("#autosuggest").empty();
+	$("#autosuggest").css('visibility', 'hidden');
 
 	// send POST to API
 	keywords = search_box.value
