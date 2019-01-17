@@ -1,12 +1,12 @@
 #left-card{
 	float: left; 
-	width: 70%;
+	width: 65%;
 	overflow-y: scroll;
 }
 
 #middle-card{
 	float: left; 
-	width: 30%;
+	width: 35%;
 
 	border-left: 1px solid #6B6B6A;
 	border-right: 1px solid #6B6B6A;

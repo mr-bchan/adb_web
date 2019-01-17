@@ -8,29 +8,29 @@ block content
       i.fa.fa-search
 
   #related_results
-    span.bg-grey.tag-input Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.bg-grey.tag-input Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.bg-grey.tag-input Lorem ipsum dolor sit amet, consectetuer adipiscing elit 
-    span.bg-grey.tag-input Lorem ipsum dolor sit amet, consectetuer adipiscing elit 
-    span.bg-grey.tag-input Lorem ipsum dolor sit amet, consectetuer adipiscing elit 
-    span.bg-grey.tag-input Lorem ipsum dolor sit amet, consectetuer adipiscing elit 
-  
-  br
-  h3.font-grey Results XX to XX of #{length} for #{query}
+    p
+      each keyword in data['related_keywords']
+        span.bg-grey.tag-input #{keyword}
+
+  h3.font-grey Results 1 to #{length} of #{length} for #{query}
   hr
   
   #search_results
     #left-card.bg-white.height-500px
-        each val, index in data
+        each val, index in data['data']
           .result-card  
-              h3.font-blue.cursor-pointer(onclick='get_cause_effects()')
-               input(type='checkbox')  
+              h4.font-blue.cursor-pointer(onclick='get_cause_effects(event)').capitalize
                | #{val.text}
-              p.cursor-pointer= val.title
-              p.font-grey Project Number: #{val.project_no} |
-                | Country: #{val.country} | Link: <a href='http://www.google.com'> #{val.country} #{index} </a>
-              span.bg-blue.tag-input tag-1
-              span.bg-red.tag-input tag-2
+              a(href=val.link, target="_blank")
+                p.cursor-pointer= val.title
+              p.font-grey Project Number: #{val.project_no}
+                | | Country: #{val.country}
+                | | Section: #{val.section}
+              
+              span.bg-orange.tag-input #{val.source}
+              each tag in val.match
+                span.bg-blue.tag-input(onclick='filter_keyword(event)') #{tag}
+
           // check if hr needs to be added
           unless index == data.length-1
             hr
@@ -38,32 +38,18 @@ block content
     #middle-card.bg-white.with-padding.height-500px
         h3 
             |Show:   
-            a(onclick='alert("all links filter pressed!")')#all_link.cursor-pointer All  
-            | |
-            a(onclick='alert("cause filter pressed!")')#cause_link.cursor-pointer Cause
-            | |  
-            a(onclick='alert("effect filter pressed!")')#effect_link.cursor-pointer Effect
-
+            span.bg-red.tag-input(onclick='reset_cause_effect_div()') cause
+            span.bg-green.tag-input(onclick='reset_cause_effect_div()') effect
+            span.bg-grey.tag-input(onclick='reset_cause_effect_div()') reset
         hr
+        #cause-effect-card
 
-        each val, index in data
-          .result-card
-              p
-                input(type='checkbox') 
-                font-blue.cursor-pointer(onclick='alert("hello!")')= val.text
-              p.cursor-pointer= val.title
-
-
-              span(onclick='alert("Clicked!")').bg-blue.tag-input tag-1
-              span.bg-red.tag-input tag-2
-              span.bg-orange.tag-input tag-3
-
-          // check if hr needs to be added
-          unless index == data.length-1
-            hr
 
 
 
     br(style='clear: left;')
 
   br
+
+  script.
+    data=!{JSON.stringify(data)}
