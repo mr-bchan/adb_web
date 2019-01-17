@@ -6,12 +6,16 @@ block content
     input#search_box(type='text', name='search', autocomplete="off", value=query)
     button#search_button(type='submit', onclick="get_problems()")
       i.fa.fa-search
-
+    button#clear_button(type='submit', onclick="clear_input_field()")
+      i.fa.fa-times
   #related_results
     each keyword in data['related_keywords']
-      span.bg-grey.tag-input #{keyword}
+      span(onclick="update_search_box(event)").bg-grey.tag-input #{keyword}
 
-  h3.font-grey Results 1 to #{length} of #{length} for #{query}
+  h3.font-grey 
+    span#result_count Results 1 to #{length} of #{length} for #{query} &nbsp;&nbsp;
+    span.bg-grey.tag-input(onclick='reset_problems_div()') Reset
+
   hr
   
   #search_results
@@ -26,9 +30,9 @@ block content
                 | | Country: #{val.country}
                 | | Section: #{val.section}
               
-              span.bg-orange.tag-input #{val.source}
+              span(onclick="filter_keyword(event, 'source')").bg-orange.tag-input #{val.source}
               each tag in val.match
-                span.bg-blue.tag-input(onclick='filter_keyword(event)') #{tag}
+                span.bg-blue.tag-input(onclick='filter_keyword(event, "problem")') #{tag}
 
           // check if hr needs to be added
           unless index == data.length-1
@@ -39,11 +43,9 @@ block content
             |Show:   
             span.bg-red.tag-input(onclick='reset_cause_effect_div()') cause
             span.bg-green.tag-input(onclick='reset_cause_effect_div()') effect
-            span.bg-grey.tag-input(onclick='reset_cause_effect_div()') reset
+            span.bg-grey.tag-input(onclick='reset_cause_effect_div()') reset             
         hr
         #cause-effect-card
-
-
 
 
     br(style='clear: left;')

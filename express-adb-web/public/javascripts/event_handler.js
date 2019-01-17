@@ -1,3 +1,10 @@
+
+
+function clear_input_field(){
+	search_box.value = '';
+	search_box.focus();
+}
+
 function search_query(){
 	console.log('Query:' + search_box.value)
     query = search_box.value
@@ -15,20 +22,40 @@ function get_suggestions(){
 }
 
 
-// Clicking related keyword for filtering
-function filter_keyword(event){
-	
+function update_search_box(event){
 	text = event.target.textContent;
-	console.log(data['data'])
+	search_box.value = text;
 
-	filtered_data = data['data'].filter(function(x) {
-		return x['match'].includes(text)
-	});
-
-	console.log(filtered_data)
-	update_cause_effect_div(filtered_data)
+	// run search with new value
+	get_problems();
 }
 
+// Clicking related keyword for filtering data
+// 1. source - by source
+// 2. problem - by match and update problem div
+// 3. cause_effect - by match and update cause/effect div
+function filter_keyword(event, target_div){
+	text = event.target.textContent;
+
+	if(target_div == 'source'){
+		filtered_data = data['data'].filter(function(x) {
+			return x['source'] == text;
+	});
+	}
+
+	else{
+		filtered_data = data['data'].filter(function(x) {
+			return x['match'].includes(text)});
+	}
+
+	if(target_div == 'problem' || target_div == 'source'){
+		update_problem_div(filtered_data);
+	}
+	else{
+		update_cause_effect_div(filtered_data)
+	}
+	
+}
 
 // show problems in #left-card div
 function get_problems(){
@@ -42,8 +69,10 @@ function get_problems(){
 		keywords = JSON.parse(data)['data']['related_keywords']
 		data = JSON.parse(data)['data']['data']
 
+		// Update results div
+		$("#result_count").text("Results 1 to " +  data.length + " of " + data.length +" for " + search_box.value + "			")
 		update_related_keywords_div(keywords)
-		// update_problem_dive(data)
+		update_problem_div(data)
 	})
 }
 
@@ -80,9 +109,46 @@ function update_related_keywords_div(keywords){
 		span_related_keyword = $('<span/>', {"class" : 'bg-grey tag-input'});
 		span_related_keyword.append(x);
 		$("#related_results").append(span_related_keyword);
+
+		span_related_keyword[0].onclick = function(event){update_search_box(event)};
 	});
 }
 
+
+function update_problem_div(data){
+	console.log('[update_problem_div]: Updating problem div')
+	$("#left-card").empty();
+	data.forEach(function(x){
+		result_card = $('<div/>', {"class" : 'result-card'});
+		
+		result_card_html = "<h4 class='font-blue cursor-pointer capitalize', onclick='get_cause_effects(event)'>" + x.text + "</h4>"
+		result_card_html = result_card_html + "<a href=" + x.link + ", target='blank'>"
+		result_card_html = result_card_html + "<p class='cursor-pointer'>" + x.title + "</p></a>"
+		result_card_html = result_card_html + "<p class='font-grey'> Project Number: " + x.project_no
+		result_card_html = result_card_html + " | Country: " + x.country
+		result_card_html = result_card_html + " | Section: " + x.section + "</p>"
+
+		result_card_html = result_card_html + "<span class='bg-orange tag-input', onclick='filter_keyword(event, \"source\")'>" + x.source + "</span>"
+		result_card.append(result_card_html);
+
+		x['match'].forEach(function(match){
+			span_match = $('<span/>', {"class" : 'bg-blue tag-input'});
+			span_match.append(match)
+			result_card.append(span_match)
+
+			span_match[0].onclick = function(event){filter_keyword(event, 'problem')};
+		})
+
+		result_card.append( "<br> <hr>");
+		$("#left-card").append(result_card)
+	});
+
+
+}
+
+function reset_problems_div(){
+	update_problem_div(data['data'])
+}
 function reset_cause_effect_div(){
 	update_cause_effect_div(data['data'])
 }
@@ -112,7 +178,7 @@ function update_cause_effect_div(data){
 				span_match.append(match)
 				result_card.append(span_match)
 
-				span_match[0].onclick = function(event){filter_keyword(event)};
+				span_match[0].onclick = function(event){filter_keyword(event, 'cause_effect')};
 			})
 
 
