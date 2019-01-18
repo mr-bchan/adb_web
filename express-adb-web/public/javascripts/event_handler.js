@@ -28,6 +28,7 @@ function get_suggestions_index(){
 
 	// dummy values
 	dummy_values = [
+		'traffic',
 		'traffic signs traffic',
 		'traffic advisory',
 		'heavy traffic',
