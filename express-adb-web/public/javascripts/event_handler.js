@@ -27,7 +27,13 @@ function get_suggestions_index(){
 	console.log('Current input: ' + text);
 
 	// dummy values
-	dummy_values = [text + 'a', text + 'ab', text + 'abc', text + ' some characters', text + ' some more characters']
+	dummy_values = [
+		'traffic signs traffic',
+		'traffic advisory',
+		'heavy traffic',
+		'trafficking',
+		'Philippine traffic'
+	];
 
 	$("#autosuggest").empty();
 
@@ -44,8 +50,17 @@ function get_suggestions_index(){
 
 		dummy_values.forEach(function(x){
 			// replace occurences of text with color blue
-			x = x.replace(new RegExp(text, 'g'), '<b><font color="#00007f">'+text+'</b></font>');
-			$("#autosuggest").append("<div class='suggestion', onclick=" + search_function + ">" + x + "</div> <hr>	")
+			text = text.trim();	
+			tokens = text.split(" ");
+
+
+			tokens.forEach(function(token){
+				if(token != ''){
+				regexp = "(" + token + ")(?![^<]*>|[^<>]*<\/)"
+				x = x.replace(new RegExp(regexp, 'gim'), '<b><font color="blue">'+token+'</b></font>');}
+			})
+
+			$("#autosuggest").append("<div class='suggestion', onclick=" + search_function + ">" + x.toLowerCase() + "</div> <hr>	")
 		})
 		
 		$("#autosuggest").css('visibility', 'visible');
@@ -130,7 +145,7 @@ function get_cause_effects(event){
 	httpPostAsync(comments = {
 		'text': keywords
 	}, url=API_URL_PROBLEM, callback=function(data){
-		
+
 		data = JSON.parse(data)['data']['data']
 		update_cause_effect_div(data)
 	})
