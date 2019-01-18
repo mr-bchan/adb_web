@@ -48,4 +48,5 @@ var API_URL_CAUSE_EFFECT = API_URL + 'get_causes_effects'
 
         console.log('Sending POST data: ' + JSON.stringify({'data':comments}));
 		xmlHttp.send(JSON.stringify({'data':comments}));
+
 }

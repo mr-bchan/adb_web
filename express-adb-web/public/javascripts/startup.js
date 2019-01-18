@@ -44,5 +44,8 @@ function on_page_load(){
 	});
 
 	search_box.focus();
+
+	// move pointer to end of input field
+	search_box.selectionStart = search_box.selectionEnd = search_box.value.length
 }
 

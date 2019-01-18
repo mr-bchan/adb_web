@@ -43,6 +43,8 @@ function get_suggestions_index(){
 		}
 
 		dummy_values.forEach(function(x){
+			// replace occurences of text with color blue
+			x = x.replace(new RegExp(text, 'g'), '<b><font color="#00007f">'+text+'</b></font>');
 			$("#autosuggest").append("<div class='suggestion', onclick=" + search_function + ">" + x + "</div> <hr>	")
 		})
 		
@@ -116,6 +118,8 @@ function get_problems(){
 
 // show cause effect in #middle-card div
 function get_cause_effects(event){
+
+	$("#cause-effect-card").empty();
 	span_keywords = event.target.parentElement.getElementsByClassName('bg-blue')
 	keywords = ''
 
@@ -126,6 +130,7 @@ function get_cause_effects(event){
 	httpPostAsync(comments = {
 		'text': keywords
 	}, url=API_URL_PROBLEM, callback=function(data){
+		
 		data = JSON.parse(data)['data']['data']
 		update_cause_effect_div(data)
 	})
@@ -139,6 +144,7 @@ function get_cause_effects(event){
 
 
 function update_related_keywords_div(keywords){
+	console.log('[update_related_keywords_div]: Updating related_keywords div')
 	console.log(keywords)
 	$("#related_results").empty();
 
@@ -191,6 +197,7 @@ function reset_cause_effect_div(){
 }
 
 function update_cause_effect_div(data){
+		console.log('[update_cause_effect_div]: Updating cause/effect div')
 		// clear cause-effect-card container
 		$("#cause-effect-card").empty();
 
