@@ -24,8 +24,9 @@ block content
     #left-card.bg-white.height-500px
         each val, index in data['data']
           .result-card  
-              h4.font-blue.cursor-pointer(onclick='get_cause_effects(event)').capitalize
-               | #{val.text}
+              h4.font-blue.cursor-pointer.capitalize
+               input(type='checkbox', onclick="select_problem(event)")
+               span(onclick='get_cause_effects(event)') #{val.text}
               a(href=val.link, target="_blank")
                 p.cursor-pointer= val.title
               p.font-grey Project Number: #{val.project_no}
@@ -40,19 +41,17 @@ block content
           unless index == data.length-1
             hr
 
-    #middle-card.bg-white.with-padding.height-500px
+    #middle-card.bg-white.with-padding.height-500px.hidden
         h3 
-            |Show:   
-            span.bg-red.tag-input(onclick='reset_cause_effect_div()') cause
-            span.bg-green.tag-input(onclick='reset_cause_effect_div()') effect
             span.bg-grey.tag-input(onclick='reset_cause_effect_div()') reset             
         hr
         #cause-effect-card
 
 
-    br(style='clear: left;')
+      
 
   br
 
   script.
     data=!{JSON.stringify(data)}
+    api_output_problems = data['data']

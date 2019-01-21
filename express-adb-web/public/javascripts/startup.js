@@ -1,10 +1,13 @@
 
 var search_box;
+var api_output_problems;
+
 
 function on_page_load(){
 	// Get the input field
 	search_box = document.getElementById("search_box");
 
+	if(search_box){
 	// Execute a function when the user releases a key on the keyboard
 	search_box.addEventListener("keyup", function(event) {
 	  // Cancel the default action, if needed
@@ -31,7 +34,6 @@ function on_page_load(){
 
 	});
 
-
 	// Execute a function when the user releases a key on the keyboard
 	search_box.addEventListener("click", function(event) {
 	  // Cancel the default action, if needed
@@ -47,5 +49,7 @@ function on_page_load(){
 
 	// move pointer to end of input field
 	search_box.selectionStart = search_box.selectionEnd = search_box.value.length
+
+	} //if search-box
 }
 
