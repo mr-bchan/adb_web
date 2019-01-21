@@ -58,7 +58,7 @@ function get_suggestions_index(){
 			tokens.forEach(function(token){
 				if(token != ''){
 				regexp = "(" + token + ")(?![^<]*>|[^<>]*<\/)"
-				x = x.replace(new RegExp(regexp, 'gim'), '<b><font color="red">'+token+'</b></font>');}
+				x = x.replace(new RegExp(regexp, 'gim'), '<b><font color="re">'+token+'</b></font>');}
 			})
 
 			$("#autosuggest").append("<div class='suggestion', onclick=" + search_function + ">" + x.toLowerCase() + "</div> <hr>	")
@@ -180,7 +180,7 @@ function update_problem_div(data){
 	data.forEach(function(x){
 		result_card = $('<div/>', {"class" : 'result-card'});
 		
-		result_card_html = "<h4 class='font-blue cursor-pointer capitalize', onclick='get_cause_effects(event)'>" + x.text + "</h4>"
+		result_card_html = "<h4 class='font-blue cursor-pointer capitalize'> <input type='checkbox'/> <span onclick='get_cause_effects(event)'>" + x.text + "</span></h4>"
 		result_card_html = result_card_html + "<a href=" + x.link + ", target='blank'>"
 		result_card_html = result_card_html + "<p class='cursor-pointer'>" + x.title + "</p></a>"
 		result_card_html = result_card_html + "<p class='font-grey'> Project Number: " + x.project_no
@@ -221,7 +221,7 @@ function update_cause_effect_div(data){
 		data.forEach(function(x){
 			result_card = $('<div/>', {"class" : 'result-card'});
 			
-			result_card.append( "<p class='font-blue cursor-pointer capitalize'>" + x['text']+ "</p>" );
+			result_card.append( "<p class='font-blue capitalize'> <input type='checkbox'/>" + x['text']+ "</p>" );
 			result_card.append( "<a href=" + x['link'] + " target='_blank'> <p class='font-grey'><i>" + x['title']+ "</i></p></a>" );
 			
 			// Cause-Effect tag

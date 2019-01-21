@@ -24,8 +24,9 @@ block content
     #left-card.bg-white.height-500px
         each val, index in data['data']
           .result-card  
-              h4.font-blue.cursor-pointer(onclick='get_cause_effects(event)').capitalize
-               | #{val.text}
+              h4.font-blue.cursor-pointer.capitalize
+               input(type='checkbox')
+               span(onclick='get_cause_effects(event)') #{val.text}
               a(href=val.link, target="_blank")
                 p.cursor-pointer= val.title
               p.font-grey Project Number: #{val.project_no}
