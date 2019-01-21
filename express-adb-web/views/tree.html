@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Problem Tree Visualization</title>
+  <link rel="icon" href="https://rawgit.com/dabeng/OrgChart/master/demo/img/logo.png">
+  
+
+  <script type="text/javascript" src="https://cdn.rawgit.com/stefanpenner/es6-promise/master/dist/es6-promise.auto.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/dabeng/OrgChart/master/demo/js/html2canvas.min.js"></script>
+
+  <link rel="stylesheet" href="https://rawgit.com/dabeng/OrgChart/master/demo/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://rawgit.com/dabeng/OrgChart/master/demo/css/jquery.orgchart.css">
+  <link rel="stylesheet" href="https://rawgit.com/dabeng/OrgChart/master/demo/css/style.css">
+
+
+  <style type="text/css">
+    .orgchart { background: #fff; }
+    .orgchart td.left, .orgchart td.right, .orgchart td.top { border-color: #aaa; }
+    .orgchart td>.down { background-color: #aaa; }
+
+    .orgchart .problem .title { background-color: #006699; width: 100%}
+    .orgchart .problem .content { border-color: #006699; width: 100%;}
+
+    .orgchart .cause .title { background-color: #009933; }
+    .orgchart .cause .content { border-color: #009933; }
+    
+    .orgchart .effect .title { background-color: red; }
+    .orgchart .effect .content { border-color: red; }
+    
+    #chart-container{
+      height: 100%; 
+    }
+
+  </style>
+</head>
+<body>
+  <div id="chart-container"></div>
+
+  <script type="text/javascript" src="https://rawgit.com/dabeng/OrgChart/master/demo/js/jquery.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/dabeng/OrgChart/master/demo/js/jquery.orgchart.js"></script>
+  <script type="text/javascript">
+    $(function() {
+
+    var causes = [
+      {'name': 'Cause A', 'title': 'Cause A', 'className': 'cause'},
+      {'name': 'Cause B', 'title': 'Cause B', 'className': 'cause'},
+      {'name': 'Cause C', 'title': 'Cause C', 'className': 'cause'}]
+     
+     var cause_tree = [{
+      'name': 'Causes', 'title': 'Causes', 'className': 'cause', 'children': causes
+    }]
+    
+
+      var problems = [
+       {'name': 'Problem A', 'title': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'className': 'problem'},
+       {'name': 'Problem B', 'title': 'Problem B', 'className': 'problem', 'children': cause_tree},
+       {'name': 'Problem C', 'title': 'Problem C', 'className': 'problem'}]
+
+    var problem_tree = [{
+      'name': 'Problems', 'title': 'Problems', 'className': 'problem', 'children': problems
+    }]
+
+     var effects = [
+      {'name': 'Effect A', 'title': 'Effect A', 'className': 'effect'},
+      {'name': 'Effect B', 'title': 'Effect B', 'className': 'effect', 'children': problem_tree},
+      {'name': 'Effect C', 'title': 'Effect C', 'className': 'effect'}]
+
+    var effect_tree = {
+      'name': 'Effects', 'title': 'Effects', 'className': 'effect', 'children': effects
+    }
+
+    // entire tree to visualize
+    var datascource = effect_tree
+
+    $('#chart-container').orgchart({
+      'data' : datascource,
+      'nodeContent': 'title',
+      'draggable': true,
+      'exportButton': true,
+      'exportFilename': 'adb_problem_tree',
+      'parentNodeSymbol': 'fa-cogs  '
+    });
+
+  });
+  </script>
+  </body>
+</html>
