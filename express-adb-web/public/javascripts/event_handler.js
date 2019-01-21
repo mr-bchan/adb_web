@@ -58,7 +58,7 @@ function get_suggestions_index(){
 			tokens.forEach(function(token){
 				if(token != ''){
 				regexp = "(" + token + ")(?![^<]*>|[^<>]*<\/)"
-				x = x.replace(new RegExp(regexp, 'gim'), '<b><font color="blue">'+token+'</b></font>');}
+				x = x.replace(new RegExp(regexp, 'gim'), '<b><font color="red">'+token+'</b></font>');}
 			})
 
 			$("#autosuggest").append("<div class='suggestion', onclick=" + search_function + ">" + x.toLowerCase() + "</div> <hr>	")
