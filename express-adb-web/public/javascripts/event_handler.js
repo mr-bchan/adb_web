@@ -85,17 +85,27 @@ function update_search_box(event){
 // 1. source - by source
 // 2. problem - by match and update problem div
 // 3. cause_effect - by match and update cause/effect div
+// 4. type - cause/problem filter
 function filter_keyword(event, target_div){
 	text = event.target.textContent;
+	
+	console.log('*********')
+	console.log(api_output_problems)
+	console.log('*********\n\n')
 
 	if(target_div == 'source'){
-		filtered_data = data['data'].filter(function(x) {
+		filtered_data = api_output_problems.filter(function(x) {
 			return x['source'] == text;
 	});
 	}
 
+	else if(target_div == 'type'){
+		filtered_data = api_output_problems.filter(function(x) {
+			return x['type'] == text;
+		});
+	}	
 	else{
-		filtered_data = data['data'].filter(function(x) {
+		filtered_data = api_output_problems.filter(function(x) {
 			return x['match'].includes(text)});
 	}
 
@@ -124,6 +134,11 @@ function get_problems(){
 		keywords = JSON.parse(data)['data']['related_keywords']
 		data = JSON.parse(data)['data']['data']
 
+		console.log(keywords)
+		console.log(data)
+
+		api_output_problems = data;
+
 		// Update results div
 		$("#result_count").text("Results 1 to " +  data.length + " of " + data.length +" for " + search_box.value + "			")
 		update_related_keywords_div(keywords)
@@ -136,12 +151,15 @@ function get_problems(){
 function get_cause_effects(event){
 
 	$("#cause-effect-card").empty();
-	span_keywords = event.target.parentElement.getElementsByClassName('bg-blue')
+
+
+	span_keywords = event.target.parentElement.parentElement.getElementsByClassName('bg-blue')
 	keywords = ''
 
 	for (var i = 0; i < span_keywords.length; i++) {
 	    keywords = keywords + ' ' + span_keywords[i].textContent; //second console output
 	}
+
 
 	httpPostAsync(comments = {
 		'text': keywords
@@ -158,10 +176,9 @@ function get_cause_effects(event){
 
 }
 
-
 function update_related_keywords_div(keywords){
 	console.log('[update_related_keywords_div]: Updating related_keywords div')
-	console.log(keywords)
+
 	$("#related_results").empty();
 
 	keywords.forEach(function(x){
@@ -177,11 +194,13 @@ function update_related_keywords_div(keywords){
 function update_problem_div(data){
 	console.log('[update_problem_div]: Updating problem div')
 
-	console.log(problems)
-
+	console.log(data)
+	
 	$("#left-card").empty();
 	data.forEach(function(x){
 		result_card = $('<div/>', {"class" : 'result-card'});
+		
+		$("#result_count").text("Results " +  data.length + " of " + api_output_problems.length +" for " + search_box.value + "			")
 		
 		if(problems.includes(x.text.trim())){
 			is_checked = 'checked'
@@ -221,7 +240,7 @@ function update_problem_div(data){
 }
 
 function reset_problems_div(){
-	update_problem_div(data['data'])
+	update_problem_div(api_output_problems)
 }
 function reset_cause_effect_div(){
 	update_cause_effect_div(data['data'])
@@ -246,13 +265,23 @@ function update_cause_effect_div(data){
 				is_checked = ''
 			}
 
-			type_input = 'cause'
-			result_card.append( "<p class='font-blue capitalize'> <input type='checkbox' onclick='select_cause_effect(event, type_input)' " + is_checked + "/>" + x['text']+ "</p>" );
+			type_input = x.type
+
+			result_card.append( "<p class='font-blue capitalize'> <input type='checkbox' onclick='select_cause_effect(event)' " + is_checked + "/>" + x['text']+ "</p>" );
 			result_card.append( "<a href=" + x['link'] + " target='_blank'> <p class='font-grey'><i>" + x['title']+ "</i></p></a>" );
 			
 			// Cause-Effect tag
-			span_type = $('<span/>', {"class" : 'bg-green tag-input'});
-			span_type.append('effect')
+			if(type_input == 'cause'){
+				span_class = 'bg-red tag-input tag-cause'
+			}
+			else{
+				span_class = 'bg-green tag-input tag-effect'
+			}
+
+			span_type = $('<span/>', {"class" : span_class});
+			span_type.append(type_input)
+			span_type[0].onclick = function(event){filter_keyword(event, 'type')};
+
 			result_card.append(span_type)
 
 			x['match'].forEach(function(match){

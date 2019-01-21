@@ -43,9 +43,6 @@ block content
 
     #middle-card.bg-white.with-padding.height-500px.hidden
         h3 
-            |Show:   
-            span.bg-red.tag-input(onclick='reset_cause_effect_div()') cause
-            span.bg-green.tag-input(onclick='reset_cause_effect_div()') effect
             span.bg-grey.tag-input(onclick='reset_cause_effect_div()') reset             
         hr
         #cause-effect-card
@@ -57,3 +54,4 @@ block content
 
   script.
     data=!{JSON.stringify(data)}
+    api_output_problems = data['data']

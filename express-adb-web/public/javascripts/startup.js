@@ -1,5 +1,7 @@
 
 var search_box;
+var api_output_problems;
+
 
 function on_page_load(){
 	// Get the input field
