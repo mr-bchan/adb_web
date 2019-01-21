@@ -140,10 +140,17 @@ function get_problems(){
 		api_output_problems = data;
 
 		// Update results div
-		$("#result_count").text("Results 1 to " +  data.length + " of " + data.length +" for " + search_box.value + "			")
+		
+		if(data.length == 0){
+			$("#result_count").text("No results found for " + search_box.value + "			")		
+		}
+		else{
+			$("#result_count").text("Results 1 to " +  data.length + " of " + data.length +" for " + search_box.value + "			 ")
+		}
 		update_related_keywords_div(keywords)
 		update_problem_div(data)
-	})
+
+	}) //-- httpPostAsync block
 }
 
 
@@ -195,7 +202,7 @@ function update_problem_div(data){
 	console.log('[update_problem_div]: Updating problem div')
 
 	console.log(data)
-	
+
 	$("#left-card").empty();
 	data.forEach(function(x){
 		result_card = $('<div/>', {"class" : 'result-card'});
