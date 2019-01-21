@@ -176,11 +176,26 @@ function update_related_keywords_div(keywords){
 
 function update_problem_div(data){
 	console.log('[update_problem_div]: Updating problem div')
+
+	console.log(problems)
+
 	$("#left-card").empty();
 	data.forEach(function(x){
 		result_card = $('<div/>', {"class" : 'result-card'});
 		
-		result_card_html = "<h4 class='font-blue cursor-pointer capitalize'> <input type='checkbox'/> <span onclick='get_cause_effects(event)'>" + x.text + "</span></h4>"
+		if(problems.includes(x.text.trim())){
+			is_checked = 'checked'
+
+			// update background color
+			result_card.css('backgroundColor', '#f6fbfc')
+		}
+		else{
+			is_checked = ''
+		}
+
+		result_card_html = "<h4 class='font-blue cursor-pointer capitalize'> <input type='checkbox' onclick='select_problem(event)' " +  
+			is_checked + "/> <span onclick='get_cause_effects(event)'>" + x.text + "</span></h4>"
+		
 		result_card_html = result_card_html + "<a href=" + x.link + ", target='blank'>"
 		result_card_html = result_card_html + "<p class='cursor-pointer'>" + x.title + "</p></a>"
 		result_card_html = result_card_html + "<p class='font-grey'> Project Number: " + x.project_no
@@ -220,15 +235,22 @@ function update_cause_effect_div(data){
 		// add result-card divs in cause-effect-card container
 		data.forEach(function(x){
 			result_card = $('<div/>', {"class" : 'result-card'});
-			
-			result_card.append( "<p class='font-blue capitalize'> <input type='checkbox'/>" + x['text']+ "</p>" );
+				
+			if(causes.includes(x.text.trim()) || effects.includes(x.text.trim())){
+				is_checked = 'checked'
+
+				// update background color
+				result_card.css('backgroundColor', '#f6fbfc')
+			}
+			else{
+				is_checked = ''
+			}
+
+			type_input = 'cause'
+			result_card.append( "<p class='font-blue capitalize'> <input type='checkbox' onclick='select_cause_effect(event, type_input)' " + is_checked + "/>" + x['text']+ "</p>" );
 			result_card.append( "<a href=" + x['link'] + " target='_blank'> <p class='font-grey'><i>" + x['title']+ "</i></p></a>" );
 			
 			// Cause-Effect tag
-			span_type = $('<span/>', {"class" : 'bg-red tag-input'});
-			span_type.append('cause')
-			result_card.append(span_type)
-
 			span_type = $('<span/>', {"class" : 'bg-green tag-input'});
 			span_type.append('effect')
 			result_card.append(span_type)
