@@ -275,6 +275,7 @@ function update_cause_effect_div(data){
 		$("#cause_count").text(cause_length + ' Causes');
 		$("#effect_count").text(effect_length + ' Effects');
 
+		console.log(data)
 		// add result-card divs in cause-effect-card container
 		data.forEach(function(x){
 			result_card = $('<div/>', {"class" : 'result-card'});

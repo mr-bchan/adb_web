@@ -1,9 +1,10 @@
 
 
-function init_page(){
+
+function init_chart_page(){
 
     // add result-card divs in cause-effect-card container
-    get_data().forEach(function(x){
+    data.forEach(function(x){
       result_card = $('<div/>', {"class" : 'result-card'});
       
       result_card.append("<p class='font-blue cursor-pointer capitalize'>")
@@ -41,59 +42,40 @@ function init_page(){
 
       $("#candidates-card").append(result_card)
     })
+
+    update_chart_page();
 }
 
-// Get dummy data
-function get_data(){
-  dummy_data = [
-    {
-      'text': 'this is a sample problem',
-      'type': 'problem'
-    },
+function update_chart_page(){
 
-    {
-      'text': 'this is a sample problem',
-      'type': 'problem'
-    },
+  problems = data.filter(x => x['type'] == 'problem');
+  causes = data.filter(x => x['type'] == 'cause');
+  effects = data.filter(x => x['type'] == 'effect');
+  
+  effects.forEach(function(x){
+      span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
+      span_card.append(x['text'])
+      $("#effect-container").append(span_card)
+    });
 
-    {
-      'text': 'this is a sample cause',
-      'type': 'cause'
-    },
 
-    {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    },
-        {
-      'text': 'this is a sample effect',
-      'type': 'effect'
-    }
-  ]
+    problems.forEach(function(x){
+        span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
+        span_card.append(x['text'])
+        $("#problem-container").append(span_card)
+      });
 
-  return dummy_data
+    causes.forEach(function(x){
+        span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
+        span_card.append(x['text'])
+        $("#cause-container").append(span_card)
+      });
+
+
+
+  jQuery(document).ready(function() {
+    jQuery('.problem').connections({ to: '.cause' });
+    jQuery('.problem').connections({ to: '.effect' });
+  });
 }
+

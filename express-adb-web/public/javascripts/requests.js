@@ -1,5 +1,5 @@
 
-var API_URL = 'http://0.0.0.0:8000/'
+var API_URL = 'http://10.0.1.122:8000/'
 
 var API_URL_PROBLEM = API_URL + 'get_problems'
 var API_URL_SUGGESTIONS = API_URL + 'suggest_words'

@@ -18,13 +18,13 @@
 
 #left-chart-card{
 	float: left; 
-	width: 45%;
+	width: 40%;
 	overflow-y: scroll;
 }
 
 #middle-chart-card{
 	float: left; 
-	width: 55%;
+	width: 60%;
 
 	border-left: 1px solid #6B6B6A;
 	border-right: 1px solid #6B6B6A;
@@ -62,31 +62,40 @@
 }
 
 
-.chart{
-	float: left; 
-	width: 100%;
-	overflow-y: scroll;
+#chart-container{
+	text-align: center;
+}
+
+.chart-card{
+	margin: 20px;
+	padding: 20px;
+	width: 150px;
 	height: 100px;
 }
 
-#problem-card{
-	background-color: red;
+#cause-container,
+#problem-container,
+#effect-container{
+	float: left;
 }
 
-#effect-card{
-	background-color: green;
+.container{
+	background-color: white;
+	overflow: auto;
 }
 
-#cause-card{
-	background-color: yellow;
+.cause{
+	border: 1px solid;
+	box-shadow: 5px 10px red;
 }
 
-#chart-card{
-	overflow-y: scroll;
+.effect{
+	border: 1px solid;
+	box-shadow: 5px 10px green;
 }
 
-.resize{
-	max-width:100%;
-	max-height:100%;
+.problem{
+	border: 1px solid;
+	box-shadow: 5px 10px blue;
 }
 

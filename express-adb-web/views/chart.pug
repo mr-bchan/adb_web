@@ -7,21 +7,17 @@ block content
       #candidates-card
 
     #middle-chart-card.bg-white.height-500px.with-padding
-      #chart-card
-        #effect-card.chart
+      #chart-container
+        #effect-container.container
+        br
+        br
+        #problem-container.container
+        br
+        br
+        #cause-container.container
 
-        .chart.bg-white
-          center
-            img(class='resize', src='https://www.emoji.co.uk/files/phantom-open-emojis/symbols-phantom/13079-upwards-black-arrow.png')
 
-        #problem-card.chart
-
-        .chart.bg-white
-
-        #cause-card.chart
-
-        .chart.bg-white
 
   script.
-    console.log(get_data());
-    init_page();
+    data=!{JSON.stringify(data)}
+    init_chart_page();
