@@ -42,10 +42,12 @@ block content
             hr
 
     #middle-card.bg-white.with-padding.height-500px.hidden
-        h3 
-            span.bg-grey.tag-input(onclick='reset_cause_effect_div()') reset             
-        hr
-        #cause-effect-card
+      h3 
+        span.bg-red.tag-input(onclick='filter_by_type("cause")').cursor-pointer#cause_count
+        span.bg-green.tag-input(onclick='filter_by_type("effect")').cursor-pointer#effect_count
+        span.bg-grey.tag-input(onclick='reset_cause_effect_div()') Reset             
+      hr
+      #cause-effect-card
 
 
       

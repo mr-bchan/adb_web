@@ -1,6 +1,7 @@
 
 var search_box;
 var api_output_problems;
+var api_output_cause_effects;
 
 
 function on_page_load(){
