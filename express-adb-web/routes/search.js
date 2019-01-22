@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
       request({
           url: API_URL_PROBLEM,
           method: 'POST',
-          json: {'data': {'text': query}}
+          json: {'data': {'text': query, 'type': 'problem'}}
         }, function(error, response, body){
 
               console.log(body)

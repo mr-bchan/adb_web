@@ -5,12 +5,14 @@
 }
 
 #middle-card{
-	float: left; 
+	float: right; 
 	width: 35%;
 
 	border-left: 1px solid #6B6B6A;
 	border-right: 1px solid #6B6B6A;
 	overflow-y: scroll;
+	position: relative;
+
 }
 
 
@@ -87,3 +89,4 @@
 	max-width:100%;
 	max-height:100%;
 }
+

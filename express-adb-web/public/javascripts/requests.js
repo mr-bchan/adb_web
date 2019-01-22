@@ -2,7 +2,7 @@
 var API_URL = 'http://0.0.0.0:8000/'
 
 var API_URL_PROBLEM = API_URL + 'get_problems'
-var API_URL_CAUSE_EFFECT = API_URL + 'get_causes_effects'
+var API_URL_SUGGESTIONS = API_URL + 'suggest_words'
 
  function httpGetAsync(url, callback)
 {
