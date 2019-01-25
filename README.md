@@ -27,3 +27,26 @@ DEBUG=express-adb-web:* npm start
 ```
 
 Then load http://localhost:3000/ in your browser to access the app.
+
+For ubuntu:
+
+1. Edit package.json
+
+{
+  "name": "express-adb-web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www" --> change to "nodejs ./bin/www
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11",
+    "request": "^2.88.0"
+  }
+}
+
