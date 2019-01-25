@@ -1,22 +1,27 @@
 extends layout
 
 block content
-  h1 Search
+  h1 Search Problems
   div.example.search
-    input#search_box(type='text', name='search', autocomplete="off", value=query)
+    input#search_box(type='text', name='search', autocomplete="off", value=query, placeholder='Enter your topic or keywords here')
+
     button#search_button(type='submit', onclick="get_problems()")
       i.fa.fa-search
     button#clear_button(type='submit', onclick="clear_input_field()")
       i.fa.fa-times
     br
     div#autosuggest
+
   #related_results
+    b.font-blue Related topics: 
     each keyword in data['related_keywords']
-      span(onclick="update_search_box(event)").bg-grey.tag-input #{keyword}
+      span(onclick="update_search_box('"+ keyword + "')").bg-grey.tag-input #{keyword}
 
   h3.font-grey 
-    span#result_count Results 1 to #{length} of #{length} for #{query} &nbsp;&nbsp;
-    span.bg-grey.tag-input(onclick='reset_problems_div()') Reset
+    span#result_count #{length} problems found for  
+      i.font-blue #{query}
+    span.bg-grey.tag-input.margin-10(onclick='reset_problems_div()') Show All
+    span.bg-red.
 
   hr
   
@@ -26,14 +31,15 @@ block content
           .result-card  
               h4.font-blue.cursor-pointer.capitalize
                input(type='checkbox', onclick="select_problem(event)")
-               span(onclick='get_cause_effects(event)') #{val.text}
+               span(onclick='update_index(0);get_cause_effects(event);this.previousSibling.click()') #{val.text}
               a(href=val.link, target="_blank")
                 p.cursor-pointer= val.title
               p.font-grey Project Number: #{val.project_no}
                 | | Country: #{val.country}
                 | | Section: #{val.section}
               
-              span(onclick="filter_keyword(event, 'source')").bg-orange.tag-input #{val.source}
+              span(onclick="filter_keyword(event, 'source')").bg-orange.tag-input 
+                |Document: #{val.source}
               each tag in val.match
                 span.bg-blue.tag-input(onclick='filter_keyword(event, "problem")') #{tag}
 
@@ -41,17 +47,16 @@ block content
           unless index == data.length-1
             hr
 
-    #middle-card.bg-white.with-padding.height-500px.hidden
-      h3 
-        span.bg-red.tag-input(onclick='filter_by_type("cause")').cursor-pointer#cause_count
-        span.bg-green.tag-input(onclick='filter_by_type("effect")').cursor-pointer#effect_count
-        span.bg-grey.tag-input(onclick='reset_cause_effect_div()') Reset             
-      hr
+    #middle-card.bg-light-grey.with-padding.height-500px.hidden
+      span.bg-white.tag-input(onclick='update_index(0);reset_cause_effect_div()')#all_count All
+      span.bg-grey.tag-input(onclick='update_index(1);filter_by_type("cause")')#cause_count Cause
+      span.bg-grey.tag-input(onclick='update_index(2);filter_by_type("effect")')#effect_count Effect
+      button.bg-grey.myButton(onclick='get_problem_tree()').cursor-pointer Generate Tree
+                
       #cause-effect-card
 
 
-      
-
+    
   br
 
   script.

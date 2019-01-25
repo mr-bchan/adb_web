@@ -32,6 +32,7 @@ hr {
     padding-left: 10px;
     overflow-x: scroll;
     overflow-y: scroll;
+    background-color: white;
        
 }
 
@@ -55,6 +56,10 @@ hr {
 
 .font-grey{
     color: #6B6B6A;
+}
+
+.font-white{
+    color: white;
 }
 
 a,
@@ -83,20 +88,24 @@ span.selected,
 
 
 .bg-red{
-    background-color: #ffcccc;
+    background-color: #ff2800;
 }
 
 
 .bg-orange{
-    background-color: #ffd8b2;
+    background-color: #fb9714;
 }
 
 .bg-grey{
-    background-color: #e4e4e4;
+    background-color: #605c57;
+}
+
+.bg-light-grey{
+    background-color:   #e6e6e6;
 }
 
 .bg-green{
-    background-color: #b2ffb2;
+    background-color: #68B03E;
 }
 .width-300px{
     width: 300px;
@@ -112,10 +121,7 @@ span.tag-input{
     margin-top: 10px;
     font-size: 12px;
     white-space:nowrap;
-}
-
-span.tag-input:hover {
-    background-color: #fffeea;
+    color:white;
 }
 
 #related_results{
@@ -145,6 +151,26 @@ span.tag-input:hover {
 
 .capitalize{
   text-transform: capitalize;
+}
+
+.resize{
+    max-width:100%;
+    max-height:100%;
+}
+
+.large-font{
+    font-size: 20px;
+}
+
+.margin-10{
+    margin: 10px;
+}
+
+.padding-5px{
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
 
 

@@ -12,23 +12,23 @@
 	border-right: 1px solid #6B6B6A;
 	overflow-y: scroll;
 	position: relative;
-
 }
 
 
 #left-chart-card{
 	float: left; 
-	width: 45%;
+	width: 40%;
 	overflow-y: scroll;
 }
 
 #middle-chart-card{
 	float: left; 
-	width: 55%;
+	width: 60%;
 
 	border-left: 1px solid #6B6B6A;
 	border-right: 1px solid #6B6B6A;
 	overflow-y: scroll;
+
 }
 
 .hidden{
@@ -62,31 +62,78 @@
 }
 
 
-.chart{
-	float: left; 
-	width: 100%;
-	overflow-y: scroll;
-	height: 100px;
+.chart-card{
+	margin: 5px;
+	padding: 10px;
+	width: 150px;
+	height: auto;
+	float: left;
+	text-align: center;
+	border: 1px solid;
+
+	border-radius: 30px;
+	/*box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);*/
+
+	font-weight: bold;
+		border-width: 2px;
 }
 
-#problem-card{
-	background-color: red;
+#chart-container{
+	background-color: white;
 }
 
-#effect-card{
-	background-color: green;
+#cause-container,
+#problem-container,
+#effect-container{
+	display: inline-block;
+	text-align: center;
+	margin: 10px;
+  	font-size: 12px;
+  	float: center;
 }
 
-#cause-card{
-	background-color: yellow;
+.cause{
+	border-color: #002569;
+	color: #002569;
+
 }
 
-#chart-card{
-	overflow-y: scroll;
+.problem{
+	background-color: #FCBB45;
+	border-color: #FCBB45	;
+	width: auto;
+	color: white;
 }
 
-.resize{
-	max-width:100%;
-	max-height:100%;
+.effect{
+	border-color: #002569;
+	color: #002569;
+
 }
 
+
+
+.myButton {
+    -moz-box-shadow:inset 0px 39px 0px -24px #193a78;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #193a78;
+    box-shadow:inset 0px 39px 0px -24px #193a78;
+    background-color:#002569;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    border:1px solid #ffffff;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-size:15px;
+    padding:6px 15px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #002569;
+}
+.myButton:hover {
+    background-color:#193a78;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}

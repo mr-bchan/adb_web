@@ -5,23 +5,43 @@ block content
   #search_results
     #left-chart-card.bg-white.height-500px
       #candidates-card
+        h3 Problems
+        #problem-card-container
+        hr
+        h3 Causes
+        #cause-card-container
+        hr
+        h3 Effects
+        #effect-card-container
+        hr
 
     #middle-chart-card.bg-white.height-500px.with-padding
-      #chart-card
-        #effect-card.chart
-
-        .chart.bg-white
+      #chart-container
+        left
+          span.myButton()#download Export        
+        #chart-container-center.bg-white
           center
-            img(class='resize', src='https://www.emoji.co.uk/files/phantom-open-emojis/symbols-phantom/13079-upwards-black-arrow.png')
+            hr
+            #effect-container.container   
+            br
+            br
+            span.bg-white#placeholder_1 Effects
+            br
+            br
+            #problem-container.container   
+            br
+            br
+            span.bg-white#placeholder_2 Causes
+            br
+            br
+            #cause-container.container
+            br
+            hr
 
-        #problem-card.chart
 
-        .chart.bg-white
-
-        #cause-card.chart
-
-        .chart.bg-white
 
   script.
-    console.log(get_data());
-    init_page();
+    data=!{JSON.stringify(data)}
+    filtered_data = data
+    init_chart_page();
+

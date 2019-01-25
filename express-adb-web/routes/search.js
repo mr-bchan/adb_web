@@ -29,7 +29,9 @@ router.get('/', function(req, res, next) {
           json: {'data': {'text': query, 'type': 'problem'}}
         }, function(error, response, body){
 
-              console.log(body)
+              if(!body['data'])
+                body['data'] = JSON.parse(JSON.parse(body)['data'])['data']
+
               res.render('search', { title: title, 
                  query: query, 
                  length: body['data']['data'].length,
