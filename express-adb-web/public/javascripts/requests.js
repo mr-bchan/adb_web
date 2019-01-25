@@ -1,5 +1,5 @@
 
-var API_URL = 'http://localhost:8000/'
+var API_URL = 'http://neuralmechanics.ai/adb-api/'
 
 var API_URL_PROBLEM = API_URL + 'get_problems'
 var API_URL_SUGGESTIONS = API_URL + 'suggest_words'
