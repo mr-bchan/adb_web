@@ -13,15 +13,11 @@ function on_page_load(){
 	search_box.addEventListener("keyup", function(event) {
 	  // Cancel the default action, if needed
 	  event.preventDefault();
-      
-      // Script: event_handler.js
-      // populate with suggested keywords
-	  get_suggestions_index()
-	  
+
 	  // Number 13 is the "Enter" key on the keyboard
 	  if (event.keyCode === 13) {
 	    // Trigger the button element with a click
-	    document.getElementById("search_button").click();
+	   	document.getElementById("search_button").click();
 	  }
 
 	  // Number 27 is the "Escape" key on the keyboard
@@ -32,6 +28,14 @@ function on_page_load(){
 		$("#autosuggest").empty();
 		$("#autosuggest").css('visibility', 'hidden');
 		  }
+
+		else{
+			      
+      // Script: event_handler.js
+      // populate with suggested keywords
+	  get_suggestions_index()
+	  
+		}
 
 	});
 
@@ -52,5 +56,34 @@ function on_page_load(){
 	search_box.selectionStart = search_box.selectionEnd = search_box.value.length
 
 	} //if search-box
+
+
+    $("#download").click(function() { 
+        html2canvas($("#chart-container-center"), {
+        	scale: 2,
+            onrendered: function(canvas) {
+                saveAs(canvas.toDataURL(), 'problem_tree.png');
+            }
+        });
+    });
 }
+
+  function saveAs(uri, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+      link.href = uri;
+      link.download = filename;
+
+      //Firefox requires the link to be in the body
+      document.body.appendChild(link);
+
+      //simulate click
+      link.click();
+
+      //remove the link when done
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
+  }
 

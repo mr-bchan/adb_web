@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  h1 Search
+  h1 Search Problems
   div.example.index
-    input#search_box(type='text', name='search', autocomplete="off")
+    input#search_box(type='text', name='search', autocomplete="off",placeholder='Enter your topic or keywords here')
     button#search_button(type='submit', onclick="search_query()")
       i.fa.fa-search
     br

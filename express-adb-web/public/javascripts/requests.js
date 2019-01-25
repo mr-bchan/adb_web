@@ -1,8 +1,10 @@
 
-var API_URL = 'http://10.0.1.122:8000/'
+var API_URL = 'http://localhost:8000/'
 
 var API_URL_PROBLEM = API_URL + 'get_problems'
 var API_URL_SUGGESTIONS = API_URL + 'suggest_words'
+
+var API_URL_PROBLEM_TREE =  'chart/create'
 
  function httpGetAsync(url, callback)
 {

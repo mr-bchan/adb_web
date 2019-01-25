@@ -1,5 +1,9 @@
 
+var selection = 0;
 
+function update_index(index){
+	selection = index
+}
 function clear_input_field(){
 
 	// clear auto suggestions
@@ -41,13 +45,15 @@ function get_suggestions_index(){
 
 		$("#autosuggest").empty();
 			if(search_box.parentElement.className == 'example index')
-				search_function = 'use_suggestion(event)'
+				search_function = 'use_suggestion'
 			else{
-				search_function = 'update_search_box(event)'
+				search_function = 'update_search_box'
 			}
 
 			data.forEach(function(x){
 				// replace occurences of text with color blue
+
+				original_text = x;
 				text = text.trim();	
 				tokens = text.split(" ");
 
@@ -58,7 +64,9 @@ function get_suggestions_index(){
 					x = x.replace(new RegExp(regexp, 'gim'), '<b><font class="font-blue">'+token+'</b></font>');}
 				})
 
-				$("#autosuggest").append("<div class='suggestion font-grey', onclick=" + search_function + ">" + x.toLowerCase() + "</div> <hr>	")
+				div_suggestion = "<div class='suggestion font-grey', onclick='" + search_function + "(\"" +original_text+"\")'>" + x.toLowerCase() + "</div> <hr>"
+				console.log(div_suggestion)
+				$("#autosuggest").append(div_suggestion);
 			})
 			
 			if(data.length > 0){
@@ -75,16 +83,16 @@ function get_suggestions_index(){
 }
 
 function use_suggestion(event){
-	search_box.value = event.target.textContent
+	search_box.value = event
 	search_query()
 }
 
 function update_search_box(event){
-	text = event.target.textContent;
-	search_box.value = text;
+	search_box.value = event;	
 	// run search with new value
 	get_problems();
 }
+
 
 function filter_by_type(type){
 	filtered_data = api_output_cause_effects.filter(function(x) {
@@ -101,10 +109,14 @@ function filter_by_type(type){
 function filter_keyword(event, target_div){
 	text = event.target.textContent;
 
+	console.log(api_output_problems)
+
 	if(target_div == 'source'){
 		filtered_data = api_output_problems.filter(function(x) {
-			return x['source'] == text;
+			return x['source'].trim() == text.split(':')[1].trim();
 	});
+
+		console.log(filtered_data)
 	}
 
 	else if(target_div == 'type'){
@@ -155,10 +167,11 @@ function get_problems(){
 		// Update results div
 		
 		if(data.length == 0){
-			$("#result_count").text("No results found for " + search_box.value + "			")		
+			$("#result_count").text("No results found for " + search_box.value + "			")
+			return		
 		}
 		else{
-			$("#result_count").text("Results 1 to " +  data.length + " of " + data.length +" for " + search_box.value + "			 ")
+			$("#result_count").html(data.length + " problems found for <i class=font-blue>" + search_box.value + "</i>")
 		}
 		update_related_keywords_div(keywords)
 		update_problem_div(data)
@@ -181,7 +194,7 @@ function get_cause_effects(event){
 
 
 	httpPostAsync(comments = {
-		'text': keywords,
+		'text': event.target.textContent.toLowerCase(),
 		'type': 'cause_effect'
 	}, url=API_URL_PROBLEM, callback=function(data){
 
@@ -201,12 +214,14 @@ function update_related_keywords_div(keywords){
 
 	$("#related_results").empty();
 
+	$("#related_results").html('<b class=font-blue> Related topics: </b>');
+
 	keywords.forEach(function(x){
 		span_related_keyword = $('<span/>', {"class" : 'bg-grey tag-input'});
 		span_related_keyword.append(x);
 		$("#related_results").append(span_related_keyword);
 
-		span_related_keyword[0].onclick = function(event){update_search_box(event)};
+		span_related_keyword[0].onclick = function(event){update_search_box(x)};
 	});
 }
 
@@ -217,9 +232,7 @@ function update_problem_div(data){
 	$("#left-card").empty();
 	data.forEach(function(x){
 		result_card = $('<div/>', {"class" : 'result-card'});
-		
-		$("#result_count").text("Results " +  data.length + " of " + api_output_problems.length +" for " + search_box.value + "			")
-		
+			
 		if(problems.includes(x.text.trim())){
 			is_checked = 'checked'
 
@@ -231,7 +244,7 @@ function update_problem_div(data){
 		}
 
 		result_card_html = "<h4 class='font-blue cursor-pointer capitalize'> <input type='checkbox' onclick='select_problem(event)' " +  
-			is_checked + "/> <span onclick='get_cause_effects(event)'>" + x.text + "</span></h4>"
+			is_checked + "/> <span onclick='selection=0;get_cause_effects(event);this.previousSibling.previousSibling.click();'>" + x.text + "</span></h4>"
 		
 		result_card_html = result_card_html + "<a href=" + x.link + ", target='blank'>"
 		result_card_html = result_card_html + "<p class='cursor-pointer'>" + x.title + "</p></a>"
@@ -239,7 +252,7 @@ function update_problem_div(data){
 		result_card_html = result_card_html + " | Country: " + x.country
 		result_card_html = result_card_html + " | Section: " + x.section + "</p>"
 
-		result_card_html = result_card_html + "<span class='bg-orange tag-input', onclick='filter_keyword(event, \"source\")'>" + x.source + "</span>"
+		result_card_html = result_card_html + "<span class='bg-orange tag-input', onclick='filter_keyword(event, \"source\")'> Document:" + x.source + "</span>"
 		result_card.append(result_card_html);
 
 		x['match'].forEach(function(match){
@@ -266,16 +279,24 @@ function reset_cause_effect_div(){
 
 function update_cause_effect_div(data){
 		console.log('[update_cause_effect_div]: Updating cause/effect div')
-		// clear cause-effect-card container
-		$("#cause-effect-card").empty();
 
-		cause_length = data.filter(x => x['type'] == 'cause').length
-		effect_length = data.length - cause_length
+		// update color and selection
 
-		$("#cause_count").text(cause_length + ' Causes');
-		$("#effect_count").text(effect_length + ' Effects');
 
-		console.log(data)
+		$('#middle-card').find($('span')).each(function (index, value) { 
+			  if(index < 3){
+			  if(index == selection){
+			  	$(this).css('color', 'black')
+			  	$(this).css('backgroundColor', 'white')
+			  }
+			  else{
+				$(this).css('color', 'white')
+			  	$(this).css('backgroundColor', '#605c57')	  	
+			  }
+			}
+			});
+
+		$("#cause-effect-card").empty()	
 		// add result-card divs in cause-effect-card container
 		data.forEach(function(x){
 			result_card = $('<div/>', {"class" : 'result-card'});

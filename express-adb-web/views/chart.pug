@@ -5,19 +5,43 @@ block content
   #search_results
     #left-chart-card.bg-white.height-500px
       #candidates-card
+        h3 Problems
+        #problem-card-container
+        hr
+        h3 Causes
+        #cause-card-container
+        hr
+        h3 Effects
+        #effect-card-container
+        hr
 
     #middle-chart-card.bg-white.height-500px.with-padding
       #chart-container
-        #effect-container.container
-        br
-        br
-        #problem-container.container
-        br
-        br
-        #cause-container.container
+        left
+          span.myButton()#download Export        
+        #chart-container-center.bg-white
+          center
+            hr
+            #effect-container.container   
+            br
+            br
+            span.bg-white#placeholder_1 Effects
+            br
+            br
+            #problem-container.container   
+            br
+            br
+            span.bg-white#placeholder_2 Causes
+            br
+            br
+            #cause-container.container
+            br
+            hr
 
 
 
   script.
     data=!{JSON.stringify(data)}
+    filtered_data = data
     init_chart_page();
+

@@ -13,7 +13,19 @@ router.get('/', function(req, res, next) {
   	{'text': 'Rapidly growing traffic', 'type':'cause'},
   	{'text': 'Unsafe road conditions', 'type':'cause'}]
   
-  var title = 'Search | Asian Development Bank'
+  console.log(data)
+  
+  var title = 'Problem Tree | Asian Development Bank'
+  res.render('chart', { 'title': title, 'data': data} );
+});
+
+/* GET home page - '/' */
+router.get('/create', function(req, res, next) {
+  
+  var data = JSON.parse('[' + req.query.data + ']')
+  console.log(data)
+  
+  var title = 'Problem Tree | Asian Development Bank'
   res.render('chart', { 'title': title, 'data': data} );
 });
 
