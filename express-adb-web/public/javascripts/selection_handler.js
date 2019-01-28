@@ -83,6 +83,6 @@ function get_problem_tree(){
 	mapped_causes = causes.map( x => JSON.stringify({'text':x, 'type': 'cause'}))
 	mapped_effects = effects.map( x => JSON.stringify({'text':x, 'type': 'effect'}))
 	tree_data = tree_data.concat(mapped_problems).concat(mapped_causes).concat(mapped_effects)
-	window.open("/chart/create?data=" + tree_data, '_blank');
+	window.open("chart/create?data=" + tree_data, '_blank');
 }
 

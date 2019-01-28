@@ -22,7 +22,7 @@ function search_query(){
     if(query && query.trim().length > 0){
     	query = encodeURIComponent(query.trim())
     	console.log('Encoded URI: ' + query)
-    	window.location.href = "/search?q=" + query;
+    	window.location.href = "search?q=" + query;
     }
 }
 
@@ -191,10 +191,17 @@ function get_cause_effects(event){
 	for (var i = 0; i < span_keywords.length; i++) {
 	    keywords = keywords + ' ' + span_keywords[i].textContent; //second console output
 	}
-
-
+    
+    if(search_box.value == 'beijing air pollution'){
+      text = event.target.textContent.toLowerCase()
+    }
+    else{
+      text = keywords
+    }
+   
+    console.log(text)
 	httpPostAsync(comments = {
-		'text': event.target.textContent.toLowerCase(),
+		'text':text,
 		'type': 'cause_effect'
 	}, url=API_URL_PROBLEM, callback=function(data){
 
