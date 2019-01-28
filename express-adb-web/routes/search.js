@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var request = require('request');
+var request = require('request'), username='nmdev', password='nmdev', auth= "Basic " + new Buffer(username + ":" + password).toString("base64");
 
 var HTTP_TIMEOUT_MS = 3000  ;
 var API_URL = 'http://neuralmechanics.ai/adb-api/'
@@ -25,10 +25,13 @@ router.get('/', function(req, res, next) {
   if(query){
       request({
           url: API_URL_PROBLEM,
+          headers:{
+            "Authorization" : auth
+          },
           method: 'POST',
           json: {'data': {'text': query, 'type': 'problem'}}
         }, function(error, response, body){
-
+              console.log(body);
               if(!body['data'])
                 body['data'] = JSON.parse(JSON.parse(body)['data'])['data']
 
