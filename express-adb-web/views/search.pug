@@ -33,7 +33,8 @@ block content
                input(type='checkbox', onclick="select_problem(event)")
                span(onclick='update_index(0);get_cause_effects(event);this.previousSibling.click()') #{val.text}
               a(href=val.link, target="_blank")
-                p.cursor-pointer= val.title
+                p.cursor-pointer 
+                  |Source: #{val.title}
               p.font-grey Project Number: #{val.project_no}
                 | | Country: #{val.country}
                 | | Section: #{val.section}
