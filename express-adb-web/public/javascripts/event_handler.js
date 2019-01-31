@@ -250,7 +250,7 @@ function update_problem_div(data){
 			is_checked = ''
 		}
 
-		result_card_html = "<h4 class='font-blue cursor-pointer capitalize'> <input type='checkbox' onclick='select_problem(event)' " +  
+		result_card_html = "<h3 class='font-blue cursor-pointer capitalize'> <input type='checkbox' onclick='select_problem(event)' " +  
 			is_checked + "/> <span onclick='selection=0;get_cause_effects(event);this.previousSibling.previousSibling.click();'>" + x.text + "</span></h4>"
 		
 		result_card_html = result_card_html + "<a href=" + x.link + ", target='blank'>"
