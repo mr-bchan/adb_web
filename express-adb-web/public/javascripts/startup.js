@@ -66,6 +66,22 @@ function on_page_load(){
             }
         });
     });
+
+
+    $("#close").click(function() { 
+        window.close();
+    });
+
+
+    $("#save").click(function() { 
+        console.log(data)
+
+        //send data to API for updating graph
+        update_problem();
+
+
+
+    });
 }
 
   function saveAs(uri, filename) {

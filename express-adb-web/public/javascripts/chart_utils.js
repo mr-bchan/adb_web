@@ -1,7 +1,11 @@
 
-
-
 function init_chart_page(){
+
+
+    // reset containers
+    $("#problem-card-container").empty();
+    $("#cause-card-container").empty();
+    $("#effect-card-container").empty();
 
     // add result-card divs in cause-effect-card container
     data.forEach(function(x){
@@ -39,32 +43,65 @@ function update_chart_page(data){
   
   causes.forEach(function(x){
       span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
+      button_card = $('<span/>', {"class" :  'chart-buttons ' });
+
       span_card.append(x['text'])
+      span_card.append('<hr>')
+
+      button_card.append('<i onclick="prompt_response(event)", class="fa fa-pencil fa-lg padding-5px cursor-pointer font-blue"></i>')
+      button_card.append('<i onclick="delete_response(event)", class="fa fa-trash fa-lg padding-5px cursor-pointer font-blue"></i>')
+
+      span_card.append(button_card)
       $("#cause-container").append(span_card)
     });
 
     problems.forEach(function(x){
         span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
+        button_card = $('<span/>', {"class" :  'chart-buttons ' });
+
         span_card.append(x['text'])
+        span_card.append('<hr>')
+
+        button_card.append('<i onclick="prompt_response(event)", class="fa fa-pencil fa-lg padding-5px cursor-pointer font-blue"></i>')
+        button_card.append('<i onclick="delete_response(event)", class="fa fa-trash fa-lg padding-5px cursor-pointer font-blue"></i>')
+
+        span_card.append(button_card)
         $("#problem-container").append(span_card)
       });
 
-  effects.forEach(function(x){
-      span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
-      span_card.append(x['text'])
-      $("#effect-container").append(span_card)
+    effects.forEach(function(x){
+        span_card = $('<div/>', {"class" :  'chart-card ' + x['type'] });
+        button_card = $('<span/>', {"class" :  'chart-buttons ' });
+
+        span_card.append(x['text'])
+        span_card.append('<hr>')
+
+        button_card.append('<i onclick="prompt_response(event)", class="fa fa-pencil fa-lg padding-5px cursor-pointer font-blue"></i>')
+        button_card.append('<i onclick="delete_response(event)", class="fa fa-trash fa-lg padding-5px cursor-pointer font-blue"></i>')
+
+        span_card.append(button_card)
+        $("#effect-container").append(span_card)
+      });
+
+
+      $( ".chart-card" ).hover(
+            function() {
+              $(this)[0].lastChild.style.display = 'inline' // show me on hover!
+            }, function() {
+              $(this)[0].lastChild.style.display = 'none' // tago tago muna!
+            }
+          );
+           
+
+      jQuery(document).ready(function() {
+      jQuery('.effect').connections({ 'to': '#placeholder_1','within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5, 'z-index': 5}});
+      jQuery('.problem').connections({ 'to': '#placeholder_1','within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5, 'z-index': 5}});
+      
+      jQuery('.cause').connections({ 'to': '#placeholder_2', 'within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5,'z-index': 5}});
+      jQuery('.problem').connections({ 'to': '#placeholder_2', 'within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5,'z-index': 5}});
+   
+      setInterval(function(){$('connection').connections('update')}, 100);
     });
-
-  jQuery(document).ready(function() {
-    jQuery('.effect').connections({ 'to': '#placeholder_1','within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5, 'z-index': 5}});
-    jQuery('.problem').connections({ 'to': '#placeholder_1','within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5, 'z-index': 5}});
-    
-    jQuery('.cause').connections({ 'to': '#placeholder_2', 'within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5,'z-index': 5}});
-    jQuery('.problem').connections({ 'to': '#placeholder_2', 'within': '#chart-container-center',css: {border: '3px solid black','opacity': 0.5,'z-index': 5}});
- 
-    setInterval(function(){$('connection').connections('update')}, 100);
-
-  });
 }
 
 function filter_data(event){

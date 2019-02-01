@@ -79,9 +79,10 @@ function select_cause_effect(event){
 function get_problem_tree(){
 	tree_data = []
 
-	mapped_problems = problems.map( x => JSON.stringify({'text':x, 'type': 'problem'}))
-	mapped_causes = causes.map( x => JSON.stringify({'text':x, 'type': 'cause'}))
-	mapped_effects = effects.map( x => JSON.stringify({'text':x, 'type': 'effect'}))
+	mapped_problems = problems.map( x => JSON.stringify({'text':escape(x), 'type': 'problem'}))
+	mapped_causes = causes.map( x => JSON.stringify({'text':escape(x), 'type': 'cause'}))
+	mapped_effects = effects.map( x => JSON.stringify({'text':escape(x), 'type': 'effect'}))
+
 	tree_data = tree_data.concat(mapped_problems).concat(mapped_causes).concat(mapped_effects)
 	window.open("chart/create?data=" + tree_data, '_blank');
 }

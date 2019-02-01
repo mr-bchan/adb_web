@@ -5,20 +5,29 @@ block content
   #search_results
     #left-chart-card.bg-white.height-500px
       #candidates-card
-        h3 Problems
+        h3.cursor-pointer(onclick='add_problem("problem")')
+            i.fa.fa-plus-square.fa-lg.font-blue
+            |  Problems
+            
         #problem-card-container
         hr
-        h3 Causes
+        h3.cursor-pointer(onclick='add_problem("cause")')
+            i.fa.fa-plus-square.fa-lg.font-blue.cursor-pointer
+            |  Causes
         #cause-card-container
         hr
-        h3 Effects
+        h3.cursor-pointer(onclick='add_problem("effect")')
+            i.fa.fa-plus-square.fa-lg.font-blue.cursor-pointer
+            |  Effects
         #effect-card-container
         hr
 
     #middle-chart-card.bg-white.height-500px.with-padding
       #chart-container
         left
-          span.myButton()#download Export        
+          span.myButton()#close Close
+          span.myButton()#save Save  
+          span.myButton()#download Export          
         #chart-container-center.bg-white
           center
             hr

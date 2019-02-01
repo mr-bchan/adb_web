@@ -3,7 +3,7 @@ var router = express.Router();
 var request = require('request'), username='nmdev', password='nmdev', auth= "Basic " + new Buffer(username + ":" + password).toString("base64");
 
 var HTTP_TIMEOUT_MS = 3000  ;
-var API_URL = 'http://neuralmechanics.ai/adb-api/'
+var API_URL = 'http://0.0.0.0:8000/'
 
 var API_URL_PROBLEM = API_URL + 'get_problems'
 var API_URL_CAUSE_EFFECT = API_URL + 'get_causes_effects'
