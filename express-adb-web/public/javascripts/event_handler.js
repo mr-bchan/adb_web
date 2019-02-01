@@ -254,7 +254,7 @@ function update_problem_div(data){
 			is_checked + "/> <span onclick='selection=0;get_cause_effects(event);this.previousSibling.previousSibling.click();'>" + x.text + "</span></h4>"
 		
 		result_card_html = result_card_html + "<a href=" + x.link + ", target='blank'>"
-		result_card_html = result_card_html + "<p class='cursor-pointer'>" + x.title + "</p></a>"
+		result_card_html = result_card_html + "<p class='cursor-pointer'> Source: " + x.title + "</p></a>"
 		result_card_html = result_card_html + "<p class='font-grey'> Project Number: " + x.project_no
 		result_card_html = result_card_html + " | Country: " + x.country
 		result_card_html = result_card_html + " | Section: " + x.section + "</p>"

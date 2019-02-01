@@ -1,8 +1,10 @@
 
-var API_URL = 'http://neuralmechanics.ai/adb-api/'
+var API_URL = 'http://0.0.0.0:8000/'
 
 var API_URL_PROBLEM = API_URL + 'get_problems'
 var API_URL_SUGGESTIONS = API_URL + 'suggest_words'
+var API_URL_UPDATE_PROBLEM = API_URL + 'update_problems'
+
 
 var API_URL_PROBLEM_TREE =  'chart/create'
 
@@ -47,7 +49,8 @@ var API_URL_PROBLEM_TREE =  'chart/create'
 		xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
 		xmlHttp.setRequestHeader("Access-Control-Allow-Methods", "POST");
 		xmlHttp.setRequestHeader("Access-Control-Allow-Headers","Content-Type");
-
+        xmlHttp.setRequestHeader("Authorization", "Basic " + btoa('nmdev' + ":" + 'nmdev'))
+        
         console.log('Sending POST data: ' + JSON.stringify({'data':comments}));
 		xmlHttp.send(JSON.stringify({'data':comments}));
 
